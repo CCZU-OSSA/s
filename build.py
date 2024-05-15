@@ -26,7 +26,7 @@ if not template.exists():
     exit(1)
 else:
     print(f"{Fore.LIGHTCYAN_EX}🤔 Loading `template.html`{Style.RESET_ALL}")
-template_text = template.read_text()
+template_text = template.read_text(encoding="utf-8")
 
 build = Path("build")
 
@@ -38,7 +38,7 @@ build.mkdir()
 print(f"{Fore.LIGHTCYAN_EX}😋 Create `build` dir{Style.RESET_ALL}")
 
 
-data: Dict[str, str] = load(config.read_text(), Loader)
+data: Dict[str, str] = load(config.read_text(encoding="utf-8"), Loader)
 length = len(data)
 current = 1
 
@@ -48,7 +48,9 @@ for target, origin in data.items():
         Style.RESET_ALL,
     )
     target_path = Path(f"build/{target}.html")
-    target_path.write_text(template_text.replace("${TARGET_URL}", origin))
+    target_path.write_text(
+        template_text.replace("${TARGET_URL}", origin), encoding="utf-8"
+    )
     print(
         Fore.LIGHTGREEN_EX + f"😎 `build/{target}.html` OK",
         Style.RESET_ALL,
