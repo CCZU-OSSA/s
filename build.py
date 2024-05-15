@@ -74,9 +74,13 @@ if not template.exists():
     print(f"{Fore.LIGHTYELLOW_EX}😅 Can't find `template.html`, Skip.{Style.RESET_ALL}")
     exit(1)
 else:
-    print(f"{Fore.LIGHTCYAN_EX}🤔 Loading `template.html`{Style.RESET_ALL}")
+    print(f"{Fore.LIGHTCYAN_EX}🤔 Loading `template-index.html`{Style.RESET_ALL}")
 template_text = template.read_text(encoding="utf-8")
 target_path = Path("build/index.html")
+print(
+    Fore.LIGHTGREEN_EX + "😋 Create `build/index.html`",
+    Style.RESET_ALL,
+)
 target_path.write_text(
     template_text.replace(
         "${CONTENT}",
