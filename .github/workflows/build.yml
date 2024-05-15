@@ -20,14 +20,10 @@ jobs:
           python-version: 3.x
 
       - name: Install
-        run: |
-          chmod +x ./install
-          ./install
+        run: ./install
 
       - name: Build
-        run: |
-          chmod +x ./build
-          ./build
+        run: ./build
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
