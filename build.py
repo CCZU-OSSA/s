@@ -42,6 +42,10 @@ data: Dict[str, str] = load(config.read_text(encoding="utf-8"), Loader)
 length = len(data)
 current = 1
 
+print(
+    Fore.LIGHTGREEN_EX + f"🤚 Start creating redirect pages (total {length})`",
+    Style.RESET_ALL,
+)
 for target, origin in data.items():
     print(
         Fore.LIGHTGREEN_EX + f"😋 Create `build/{target}.html ({current}/{length})`",
@@ -56,6 +60,30 @@ for target, origin in data.items():
         Style.RESET_ALL,
     )
     current += 1
+print(
+    Fore.LIGHTGREEN_EX + "🥰 Done!",
+    Style.RESET_ALL,
+)
+
+print(
+    Fore.LIGHTGREEN_EX + f"🤚 Start creating index page (total {length})`",
+    Style.RESET_ALL,
+)
+template = Path("template-index.html")
+if not template.exists():
+    print(f"{Fore.LIGHTYELLOW_EX}😅 Can't find `template.html`, Skip.{Style.RESET_ALL}")
+    exit(1)
+else:
+    print(f"{Fore.LIGHTCYAN_EX}🤔 Loading `template.html`{Style.RESET_ALL}")
+template_text = template.read_text(encoding="utf-8")
+target_path = Path("build/index.html")
+target_path.write_text(
+    template_text.replace(
+        "${CONTENT}",
+        "\n".join(map(lambda data: f'<a href="{data[1]}">{data[0]}</a>', data.items())),
+    ),
+    encoding="utf-8",
+)
 print(
     Fore.LIGHTGREEN_EX + "🥰 Done!",
     Style.RESET_ALL,
