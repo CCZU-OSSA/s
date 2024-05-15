@@ -19,16 +19,11 @@ jobs:
         with:
           python-version: 3.x
 
-      - name: Grant Permissions
-        run: |
-          chmod +x ./install.sh
-          chmod +x ./build.sh
-
       - name: Install
-        run: ./install.sh
+        run: pip install -r requirements.txt
 
       - name: Build
-        run: ./build.sh
+        run: python .\build.py
 
       - name: Deploy
         uses: s0/git-publish-subdir-action@develop
