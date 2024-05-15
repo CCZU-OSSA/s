@@ -19,6 +19,11 @@ jobs:
         with:
           python-version: 3.x
 
+      - name: Grant Permissions
+        run: |
+          chmod +x ./install.sh
+          chmod +x ./build.sh
+
       - name: Install
         run: ./install.sh
 
