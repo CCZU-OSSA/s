@@ -80,7 +80,9 @@ target_path = Path("build/index.html")
 target_path.write_text(
     template_text.replace(
         "${CONTENT}",
-        "\n".join(map(lambda data: f'<a href="{data[1]}">{data[0]}</a>', data.items())),
+        "\n".join(
+            map(lambda data: f'<a href="{data[1]}">{data[0]}</a><br>', data.items())
+        ),
     ),
     encoding="utf-8",
 )
